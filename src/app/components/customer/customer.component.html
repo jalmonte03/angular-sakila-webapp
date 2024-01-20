@@ -1,0 +1,9 @@
+<mat-card class="customer-component">
+    <div class="id">id: {{ customer?.id }}</div>
+    <div class="fullname">
+        {{ customer?.first_Name | lowercase }} {{ customer?.last_Name | lowercase }}
+    </div>
+    <div class="email">
+        {{ customer?.email | lowercase }}
+    </div>
+</mat-card>

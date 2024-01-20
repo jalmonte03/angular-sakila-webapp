@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 // Components
 import { AppComponent } from './app.component';
@@ -20,6 +22,11 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { RentalsComponent } from './pages/rentals/rentals.component';
 import { FilmsComponent } from './pages/films/films.component';
+import { SidebarContentComponent } from './layout/sidebar-content/sidebar-content.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +37,21 @@ import { FilmsComponent } from './pages/films/films.component';
     DashboardComponent,
     CustomersComponent,
     RentalsComponent,
-    FilmsComponent
+    FilmsComponent,
+    SidebarContentComponent,
+    CustomerComponent,
+    PaginatorComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MatSlideToggleModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatCardModule,
+    MatPaginatorModule,
     BrowserAnimationsModule,
     MatIconModule,
     RouterOutlet

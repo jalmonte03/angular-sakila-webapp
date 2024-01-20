@@ -3,7 +3,11 @@ mat-sidenav-container {
 }
 
 mat-sidenav-content {
-    padding: 1rem;
+    section {
+        height: 100%;
+        box-sizing: border-box;
+        padding: 1rem;
+    }
 }
 
 .sidenav-menu {

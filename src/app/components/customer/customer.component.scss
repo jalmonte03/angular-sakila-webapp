@@ -1,0 +1,22 @@
+.customer-component {
+    padding: 1rem;
+    cursor: pointer;
+    user-select: none;
+    background-color: #efefef;
+
+    &:hover {
+        background-color: #dedede;
+    }
+}
+
+.id {
+    position: absolute;
+    font-size: .75rem;
+    top: 1rem;
+    right: 1rem;
+}
+
+.fullname {
+    font-weight: bold;
+    text-transform: capitalize;
+}

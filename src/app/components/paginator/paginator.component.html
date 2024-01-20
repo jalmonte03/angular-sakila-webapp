@@ -1,0 +1,8 @@
+<mat-card class="paginator-component">
+    <mat-paginator 
+        [length]="totalItems" 
+        [pageSize]="limit"
+        [pageIndex]="currentPage - 1" 
+        [pageSizeOptions]="[10,25,50]"
+        (page)="onPageChangeEvent.emit($event)" />
+</mat-card>

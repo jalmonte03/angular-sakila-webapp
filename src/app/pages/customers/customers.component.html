@@ -1,1 +1,6 @@
-<p>customers works!</p>
+<app-sidebar-content>
+    <div class="customers-list-ctr">
+        <app-customer *ngFor="let customer of customers;index as i" [customer]="customer" />
+    </div>
+    <app-paginator [currentPage]="currentPage" [totalItems]="total" [limit]="limit" (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
+</app-sidebar-content>

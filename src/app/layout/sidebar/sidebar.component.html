@@ -1,5 +1,5 @@
-<mat-sidenav-container hasBackdrop="false">
-    <mat-sidenav [(opened)]="openedSideBar" mode="push" [disableClose]="true">
+<mat-sidenav-container hasBackdrop="false" [autosize]="true">
+    <mat-sidenav [(opened)]="openedSideBar" mode="side" [disableClose]="true">
         <div class="sidenav-menu">
             <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon fontIcon="dashboard"></mat-icon>
@@ -7,7 +7,7 @@
             </a>
             <a [routerLink]="['/customers']" routerLinkActive="active">
                 <mat-icon fontIcon="person"></mat-icon>
-                <span>Customer</span>
+                <span>Customers</span>
             </a>
             <a [routerLink]="['/rentals']" routerLinkActive="active">
                 <mat-icon fontIcon="shoppingmode"></mat-icon>
@@ -19,7 +19,9 @@
             </a>
         </div>
     </mat-sidenav>
-    <mat-sidenav-content>
-        <ng-content></ng-content>
+    <mat-sidenav-content >
+        <section>
+            <ng-content></ng-content>
+        </section>
     </mat-sidenav-content>
 </mat-sidenav-container>
