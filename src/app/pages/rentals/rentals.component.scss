@@ -1,0 +1,19 @@
+@import "../../../sass/mixin";
+
+
+
+.no-rental-message {
+    flex: 1;
+    text-align: center;
+    margin-top: 10rem;
+    font-size: 1.25rem;
+}
+
+
+.loading-spinner-ctr {
+    flex: 1;
+}
+
+.films-list-ctr {
+    @include list-container;
+}

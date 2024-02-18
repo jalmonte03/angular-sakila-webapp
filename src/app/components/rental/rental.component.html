@@ -1,0 +1,9 @@
+<mat-card class="film-component">
+    <div class="id">id: {{ rental?.id }}</div>
+    <div class="title">
+        {{ rental?.filmTitle| lowercase }}
+    </div>
+    <div class="categories">
+        <span>{{ rental?.rentalDate }} to {{ rental?.returnDate }}</span>
+    </div>
+</mat-card>

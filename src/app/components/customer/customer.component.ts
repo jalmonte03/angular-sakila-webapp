@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Customer } from '../../types/models/customer';
+import { MaterialModule } from '../../modules/material.module';
 
 @Component({
   selector: 'app-customer',

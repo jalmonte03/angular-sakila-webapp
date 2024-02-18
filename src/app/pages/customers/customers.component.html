@@ -1,6 +1,28 @@
 <app-sidebar-content>
-    <div class="customers-list-ctr">
+    <!-- Filters Bar -->
+    <app-filters-bar
+        [searchFilter]="searchString"
+        [currentPage]="currentPage" 
+        [totalItems]="total" 
+        [limit]="limit" 
+        (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
+    <!-- Customer List -->
+    <div class="customers-list-ctr" *ngIf="!loading && customers.length > 0">
         <app-customer *ngFor="let customer of customers;index as i" [customer]="customer" />
     </div>
-    <app-paginator [currentPage]="currentPage" [totalItems]="total" [limit]="limit" (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
+    <!-- No Customer -->
+    <div class="no-customers-msg" *ngIf="!loading && customers.length == 0">
+        There is no customers to show.
+    </div>
+    <!-- Loading Spinner -->
+    <div class="loading-spinner-ctr" *ngIf="loading">
+        <app-spinner></app-spinner>
+    </div>
+
+    <!-- Pagination -->
+    <app-paginator 
+        [currentPage]="currentPage" 
+        [totalItems]="total" 
+        [limit]="limit" 
+        (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
 </app-sidebar-content>

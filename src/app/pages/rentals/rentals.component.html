@@ -1,4 +1,17 @@
 <app-sidebar-content title="Rentals">
-    <div>Rentals</div>
-    <div>Pagination</div>
+    <!-- Rentals List -->
+    <div class="films-list-ctr" *ngIf="!loading">
+        <app-rental *ngFor="let rental of rentals" [rental]="rental" />   
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner-ctr" *ngIf="loading">
+        <app-spinner></app-spinner>
+    </div>
+
+    <!-- No Rentals Message -->
+    <div *ngIf="!loading && rentals.length == 0" class="no-rental-message">There is no rentals to show.</div>
+
+    <!-- Pagination -->
+    <app-paginator [currentPage]="currentPage" [totalItems]="total" [limit]="limit" (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
 </app-sidebar-content>

@@ -135,7 +135,7 @@ export class CustomerService {
 
   constructor(private httpService: HttpService) { }
 
-  getCustomers(currentPage?: number, limit?: number) {
+  getCustomers(currentPage?: number, limit?: number, searchString?: string) {
     let queryParams = "";
 
     if (typeof currentPage == "number"){
@@ -143,6 +143,10 @@ export class CustomerService {
         page: (currentPage + 1).toString(),
         limit: limit?.toString() || "10"
       });
+
+      if(searchString) {
+        searchParams.append("name", searchString)
+      }
 
       queryParams = `?${searchParams.toString()}`;
     }

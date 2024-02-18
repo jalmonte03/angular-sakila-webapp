@@ -1,6 +1,6 @@
 @import "../../../sass/mixin";
 
-.customer-component {
+.film-component {
     @include component-list;
 }
 
@@ -11,7 +11,7 @@
     right: 1rem;
 }
 
-.fullname {
+.title {
     font-weight: bold;
     text-transform: capitalize;
 }

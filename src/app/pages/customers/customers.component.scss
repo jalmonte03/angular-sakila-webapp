@@ -1,5 +1,13 @@
+@import "../../../sass/mixin";
+
 .customers-list-ctr {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    @include list-container;
+}
+
+.loading-spinner-ctr {
+    flex: 1;
+}
+
+.no-customers-msg {
+    text-align: center;
 }

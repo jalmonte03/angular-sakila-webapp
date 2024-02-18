@@ -1,4 +1,17 @@
-<app-sidebar-content title="Films">
-    <div>Films List</div>
-    <div>Pagination</div>
+<app-sidebar-content>
+    <!-- Films List -->
+    <div class="films-list-ctr" *ngIf="!loading">
+        <app-film *ngFor="let film of films" [film]="film" />   
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner-ctr" *ngIf="loading">
+        <app-spinner></app-spinner>
+    </div>
+
+    <!-- No Films Message -->
+    <div *ngIf="!loading && films.length == 0" class="no-film-message">There is no film to show.</div>
+
+    <!-- Pagination -->
+    <app-paginator [currentPage]="currentPage" [totalItems]="total" [limit]="limit" (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
 </app-sidebar-content>

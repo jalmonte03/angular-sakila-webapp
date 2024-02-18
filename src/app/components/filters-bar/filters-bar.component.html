@@ -1,0 +1,19 @@
+<mat-card class="filters-bar-component">
+    <div>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Search Customer</mat-label>
+            <input matInput placeholder="eg: John Doe" />
+            <button matSuffix mat-icon-button (click)="onSearchEvent.emit()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-paginator 
+            [length]="totalItems" 
+            [pageSize]="limit"
+            [pageIndex]="currentPage - 1" 
+            [pageSizeOptions]="[10,25,50]"
+            (page)="onPageChangeEvent.emit($event)" />
+    </div>
+</mat-card>
