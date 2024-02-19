@@ -3,7 +3,9 @@
     <div class="fullname">
         {{ customer?.first_Name | lowercase }} {{ customer?.last_Name | lowercase }}
     </div>
-    <div class="email">
-        {{ customer?.email | lowercase }}
-    </div>
+    <hr />
+    <dl>
+        <dt>Email</dt>
+        <dd>{{ customer?.email | lowercase }}</dd>
+    </dl>
 </mat-card>

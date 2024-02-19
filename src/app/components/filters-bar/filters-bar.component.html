@@ -1,8 +1,14 @@
 <mat-card class="filters-bar-component">
     <div>
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
-            <mat-label>Search Customer</mat-label>
-            <input matInput placeholder="eg: John Doe" />
+            <mat-label>{{ inputLabel }}</mat-label>
+            <input 
+                matInput 
+                [placeholder]="inputPlaceholder" 
+                name="search" 
+                [(ngModel)]="searchFilter" 
+                (ngModelChange)="searchFilterChange.emit(searchFilter)"
+                (keyup)="onEnterKeyPressed($event)" />
             <button matSuffix mat-icon-button (click)="onSearchEvent.emit()">
                 <mat-icon>search</mat-icon>
             </button>

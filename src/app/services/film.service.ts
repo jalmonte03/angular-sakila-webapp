@@ -12,7 +12,7 @@ export class FilmService
 
     constructor(private httpService: HttpService) { }
 
-    getFilms(currentPage?: number, limit?: number) {
+    getFilms(currentPage?: number, limit?: number, title?: string) {
         let queryParams = "";
 
         if(typeof currentPage == "number") {
@@ -20,6 +20,10 @@ export class FilmService
                 page: (currentPage + 1).toString(),
                 limit: limit?.toString() || "10"
             });
+
+            if(title) {
+                searchParams.append("title", title);
+            }
 
             queryParams = `?${searchParams.toString()}`;
         }

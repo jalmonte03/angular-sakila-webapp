@@ -3,7 +3,11 @@
     <div class="title">
         {{ rental?.filmTitle| lowercase }}
     </div>
-    <div class="categories">
-        <span>{{ rental?.rentalDate }} to {{ rental?.returnDate }}</span>
-    </div>
+    <hr/>
+    <dl>
+        <dt>Rented On</dt> 
+        <dd>{{ rental?.rentalDate | date: 'medium' }}</dd>
+        <dt>Returned</dt> 
+        <dd>{{ rental?.returnDate | date: 'medium' }}</dd>
+    </dl>
 </mat-card>

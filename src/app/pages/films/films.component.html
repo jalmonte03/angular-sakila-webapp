@@ -1,4 +1,15 @@
 <app-sidebar-content>
+    <!-- Filter Bar -->
+    <app-filters-bar
+        [(searchFilter)]="searchString"
+        inputLabel="Search Films"
+        inputPlaceholder="Eg: Divine Resurrection"
+        [currentPage]="currentPage" 
+        [totalItems]="total" 
+        [limit]="limit" 
+        (onPageChangeEvent)="onPaginatorChangedHandler($event)"
+        (onSearchEvent)="onSearchFilterClickedHandler()"
+        />
     <!-- Films List -->
     <div class="films-list-ctr" *ngIf="!loading">
         <app-film *ngFor="let film of films" [film]="film" />   

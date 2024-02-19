@@ -3,7 +3,9 @@
     <div class="title">
         {{ film?.title | lowercase }}
     </div>
-    <div class="categories">
-        <span *ngFor="let category of film?.categories">{{ category.name }}</span>
-    </div>
+    <hr />
+    <dl>
+        <dt>Category</dt>
+        <dd *ngFor="let category of film?.categories">{{ category.name }}</dd>
+    </dl>
 </mat-card>

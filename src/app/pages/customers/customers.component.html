@@ -1,11 +1,14 @@
 <app-sidebar-content>
     <!-- Filters Bar -->
     <app-filters-bar
-        [searchFilter]="searchString"
+        inputLabel="Search Customer"
+        inputPlaceholder="Eg: John Doe"
+        [(searchFilter)]="searchString"
         [currentPage]="currentPage" 
         [totalItems]="total" 
         [limit]="limit" 
-        (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
+        (onPageChangeEvent)="onPaginatorChangedHandler($event)"
+        (onSearchEvent)="onSearchFilterClickedHandler()" />
     <!-- Customer List -->
     <div class="customers-list-ctr" *ngIf="!loading && customers.length > 0">
         <app-customer *ngFor="let customer of customers;index as i" [customer]="customer" />

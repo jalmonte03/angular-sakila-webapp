@@ -33,6 +33,7 @@ import { RentalComponent } from './components/rental/rental.component';
 import { FiltersBarComponent } from './components/filters-bar/filters-bar.component';
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
+import { HorizontalBargraphComponent } from './components/horizontal-bargraph/horizontal-bargraph.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FormsModule } from '@angular/forms';
     SpinnerComponent,
     FilmComponent,
     RentalComponent,
-    FiltersBarComponent
+    FiltersBarComponent,
+    HorizontalBargraphComponent
   ],
   imports: [
     BrowserModule,

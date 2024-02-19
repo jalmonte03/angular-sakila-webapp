@@ -58,3 +58,23 @@ app-root {
   flex-direction: column;
   height: 100vh;
 }
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-left: 1rem;
+}
+
+dt, dl {
+  font-size: .75rem;
+}
+
+hr {
+  width: 100%;
+}

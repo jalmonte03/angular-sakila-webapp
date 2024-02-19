@@ -8,7 +8,8 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class FiltersBarComponent {
   // Search Filter Properties
-  @Input() searchFilter: string = "";
+  @Input() searchFilter?: string;
+  @Output() searchFilterChange = new EventEmitter<string>();
   @Input() inputLabel: string = "Search";
   @Input() inputPlaceholder: string = "Search";
   @Output() onSearchEvent = new EventEmitter();
@@ -19,4 +20,10 @@ export class FiltersBarComponent {
   @Input() limit: number = 10;
   @Input() pageOptions: number[] = [10,25,50];
   @Output() onPageChangeEvent = new EventEmitter<PageEvent>();
+
+  onEnterKeyPressed(event: KeyboardEvent) {
+    if (event.key === "Enter"){
+      this.onSearchEvent.emit();
+    }
+  }
 }

@@ -1,6 +1,12 @@
 <app-sidebar-content title="Dashboard">
-    <div>Most Rented Films</div>
-    <div>Category Most Watched</div>
-    <div>Top Renters 10 Customers</div>
-    <div>Rented by month Bargraph</div>
+    <div class="dashboard-container">
+        <app-horizontal-bargraph
+            graphId="top-5-movies"
+            labelText="Top 5 Most Watched Movies" />
+        <div>Category Most Watched</div>
+        <app-horizontal-bargraph
+            graphId="top-10-renters"
+            labelText="Top 10 Renters" />
+        <div>Rented by month Bargraph</div>
+    </div>
 </app-sidebar-content>
