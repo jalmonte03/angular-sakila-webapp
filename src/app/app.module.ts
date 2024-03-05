@@ -34,6 +34,12 @@ import { FiltersBarComponent } from './components/filters-bar/filters-bar.compon
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { HorizontalBargraphComponent } from './components/horizontal-bargraph/horizontal-bargraph.component';
+import { PiegraphComponent } from './components/piegraph/piegraph.component';
+import { VerticalBargraphComponent } from './components/vertical-bargraph/vertical-bargraph.component';
+import { LinechartComponent } from './components/linechart/linechart.component';
+import { CustomerViewModalComponent } from './pages/customers/customer-view-modal/customer-view-modal.component';
+import { ReadonlyInputComponent } from './components/readonly-input/readonly-input.component';
+import { ReadonlyCheckboxComponent } from './components/readonly-checkbox/readonly-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +58,13 @@ import { HorizontalBargraphComponent } from './components/horizontal-bargraph/ho
     FilmComponent,
     RentalComponent,
     FiltersBarComponent,
-    HorizontalBargraphComponent
+    HorizontalBargraphComponent,
+    PiegraphComponent,
+    VerticalBargraphComponent,
+    LinechartComponent,
+    CustomerViewModalComponent,
+    ReadonlyInputComponent,
+    ReadonlyCheckboxComponent
   ],
   imports: [
     BrowserModule,

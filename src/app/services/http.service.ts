@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class HttpService {
 
   }
 
-  GetMethod(endpoint: string) {
-    return this.httpClient.get(this.apiUrl + endpoint);
+  GetMethod<T>(endpoint: string): Observable<T> {
+    return this.httpClient.get(this.apiUrl + endpoint) as Observable<T>;
   }
 
   PostMethod(endpoint: string, body: any) {

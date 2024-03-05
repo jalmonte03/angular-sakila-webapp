@@ -1,0 +1,6 @@
+<div class="piegraph-component" [ngClass]="{hidden: loading}">
+    <canvas #pieGraph>{{ chart }}</canvas>
+</div>
+<div class="loading-spinner-container" *ngIf="loading">
+    <app-spinner />
+</div>

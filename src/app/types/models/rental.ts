@@ -11,3 +11,15 @@ export type Rental = {
     rentalDate: string,
     returnDate: string
 };
+
+export type RentalMonthSummary = {
+    month: string,
+    year: string,
+    amount: number
+};
+
+export type RentalMonthRevenue = {
+    month: string,
+    year: string,
+    revenue: number
+};

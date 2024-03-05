@@ -13,3 +13,9 @@ export type Film = {
         name: string
     }>
 };
+
+export type FilmWatched = {
+   filmId: number,
+   filmTitle: string,
+   rented: number 
+};

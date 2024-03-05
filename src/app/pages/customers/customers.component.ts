@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../types/models/customer';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomerViewModalComponent } from './customer-view-modal/customer-view-modal.component';
 
 @Component({
   selector: 'app-customers',
@@ -20,9 +22,16 @@ export class CustomersComponent implements OnInit {
   total = 0;
   limit = 10;
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    public customerViewModal: MatDialog,
+    private customerService: CustomerService
+  ) {}
   
   ngOnInit(): void {
+    // Show modal on init (temporary)
+    const customerViewRef = this.customerViewModal.open(CustomerViewModalComponent);
+
+    // Fetch all customers
     this.customerService.getCustomers()
       .subscribe({
         next: (response) => {

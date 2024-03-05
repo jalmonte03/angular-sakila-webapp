@@ -1,0 +1,6 @@
+<div class="linegraph-component" [ngClass]="{hidden: loading}">
+    <canvas #lineGraph>{{ chart }}</canvas>
+</div>
+<div class="loading-spinner-container" *ngIf="loading">
+    <app-spinner />
+</div>

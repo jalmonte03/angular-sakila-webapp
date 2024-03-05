@@ -1,0 +1,22 @@
+hr { margin: 1.5rem 0; }
+
+h2.title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.customer-info-data,
+.customer-summary-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dialog-actions-ctr {
+    display: flex;
+    width: 100%;
+    padding: .5rem 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+}

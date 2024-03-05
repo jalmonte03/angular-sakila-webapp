@@ -1,0 +1,33 @@
+<h2 mat-dialog-title class="title">Customer Viewer</h2>
+<mat-dialog-content>
+    <h4>Customer Info</h4>
+    <div class="customer-info-data">
+        <app-readonly-input label="Customer Id" value="1" />
+        <app-readonly-input label="Full Name" value="John Doe" />
+        <app-readonly-input label="Email" value="john.doe@email.com" />
+        <app-readonly-input label="Address" value="123 Main Street" />
+        <app-readonly-input label="Address 2" value="Apt #412" />
+        <app-readonly-input label="State | District" value="Florida" />
+        <app-readonly-input label="City" value="Orlando" />
+        <app-readonly-input label="Postal Code" value="32792" />
+        <app-readonly-input label="Customer Since" value="May 2024" />
+        <app-readonly-checkbox label="Is active?" [checked]="true" />
+    </div>
+    <hr />
+    <h4>Customer Summary</h4>
+    <div class="customer-summary-data">
+        <app-readonly-input label="Movies Rented" value="14" />
+        <app-readonly-input label="Movies not returned" value="1" />
+        <app-readonly-input label="Amount Spent" value="$45.00" />
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="dialog-actions-ctr">
+        <div>
+            <button mat-button mat-raised-button>View Rentals</button>
+        </div>
+        <div>
+            <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>
+        </div>
+    </div>
+</mat-dialog-actions>

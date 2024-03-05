@@ -11,6 +11,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     exports: [
@@ -23,7 +25,9 @@ import { MatButtonModule } from '@angular/material/button';
         MatProgressSpinnerModule,
         MatInputModule,
         MatFormFieldModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDialogModule,
+        MatCheckboxModule
     ],
     providers: [],
     declarations: []
