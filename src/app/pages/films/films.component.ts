@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Film } from '../../types/models/film';
 import { FilmService } from '../../services/film.service';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { FilmViewModalComponent } from './film-view-modal/film-view-modal.component';
 
 @Component({
   selector: 'app-films',
@@ -17,7 +19,9 @@ export class FilmsComponent implements OnInit {
   limit: number = 10;
   loading: boolean = true;
   
-  constructor(private filmService: FilmService) { }
+  constructor(
+    public filmViewModal: MatDialog,
+    private filmService: FilmService) { }
   
   ngOnInit(): void {
     this.filmService.getFilms()
@@ -51,5 +55,13 @@ export class FilmsComponent implements OnInit {
           this.total = response.total;
         }
       })
+  }
+
+  onFilmClickedHandler(filmId: number) {
+    const customerViewRef = this.filmViewModal.open(FilmViewModalComponent, {
+      data: {
+        filmId
+      }
+    });
   }
 }

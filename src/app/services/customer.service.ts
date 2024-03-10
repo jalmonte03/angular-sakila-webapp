@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Customer } from '../types/models/customer';
+import { Customer, CustomerSummary } from '../types/models/customer';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { CustomersResponse } from '../types/api/customers';
@@ -153,6 +153,18 @@ export class CustomerService {
 
     const response = this.httpService.GetMethod(this.endpointUrl + queryParams) as Observable<CustomersResponse>;
     
+    return response;
+  }
+
+  getSingleCustomer(customerId: number){
+    const response = this.httpService.GetMethod(this.endpointUrl + `/${customerId}`) as Observable<Customer>;
+
+    return response;
+  }
+
+  getCustomerSummary(customerId: number){
+    const response = this.httpService.GetMethod(this.endpointUrl + `/${customerId}/summary`) as Observable<CustomerSummary>;
+
     return response;
   }
 }

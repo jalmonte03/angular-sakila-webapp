@@ -19,3 +19,10 @@ export type FilmWatched = {
    filmTitle: string,
    rented: number 
 };
+
+export type FilmSummary = {
+    rented: number,
+    notReturned: number,
+    grossIncome: number,
+    inStock: number
+};

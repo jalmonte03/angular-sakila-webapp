@@ -1,0 +1,41 @@
+<h2 mat-dialog-title class="title">Film Viewer</h2>
+<mat-dialog-content>
+    @if(!loading)
+    {
+        @if(film !== undefined && filmSummary !== undefined)
+        {
+            <h4>Film Info</h4>
+            <div class="film-info-data">
+                <app-readonly-input label="Film Id" [value]="film.id.toString()" />
+                <app-readonly-input label="Title" value="{{ film.title| titlecase }}" />
+                <app-readonly-input label="Description" [value]="film.description" textarea />
+                <app-readonly-input label="Release Year" [value]="film.releaseYear" />
+                <app-readonly-input label="Rental Duration" value="{{film.rentalDuration}} days" />
+                <app-readonly-input label="Rental Rate" value="{{film.rentalRate | currency }}" />
+                <app-readonly-input label="Film Length" value="{{film.length }} minutes" />
+                <app-readonly-input label="Rating" [value]="film.rating" />
+                <app-readonly-input label="Categories" [value]="filmCategories ?? 'N/A'" />
+            </div>
+            <hr />
+            <h4>Film Summary</h4>
+            <div class="film-summary-data">
+                <app-readonly-input label="Rented" [value]="filmSummary.rented.toString()" />
+                <app-readonly-input label="Gross Income" value="{{filmSummary.grossIncome | currency}}" />
+                <app-readonly-input label="In Stock" [value]="filmSummary.inStock.toString()" />
+                <app-readonly-input label="Not Returned | Lost" [value]="filmSummary.notReturned.toString()" />
+            </div>
+        }
+    } @else {
+        <app-spinner />
+    }
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="dialog-actions-ctr">
+        <div>
+            <button mat-button mat-raised-button [disabled]="this.loading">View Rentals</button>
+        </div>
+        <div>
+            <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>
+        </div>
+    </div>
+</mat-dialog-actions>

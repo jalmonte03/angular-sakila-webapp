@@ -1,0 +1,31 @@
+.search-filters-bar-component {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem;
+    margin: 1rem 0 2rem 0;
+    
+
+    &__multiple {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        align-items: stretch;
+        height: 100%;
+
+        .mat-mdc-form-field {
+            width: 10rem;
+        }
+
+        button {
+            height: 100%;
+            padding: 0 2rem;
+
+            .mat-icon {
+                font-size: 1.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+        }
+    }
+}

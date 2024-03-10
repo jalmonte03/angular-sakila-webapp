@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable, map } from "rxjs";
 import { FilmsResponse } from "../types/api/films";
-import { FilmWatched } from "../types/models/film";
+import { Film, FilmSummary, FilmWatched } from "../types/models/film";
 import { GraphData } from "../types/shared/graph";
 import { CategoryWatched } from "../types/models/category";
 
@@ -14,6 +14,12 @@ export class FilmService
     private endPointUrl = "/films";
 
     constructor(private httpService: HttpService) { }
+
+    getSingleFilm(filmId: number) {
+        const response = this.httpService.GetMethod(this.endPointUrl + `/${filmId}`) as Observable<Film>;
+
+        return response;
+    }
 
     getFilms(currentPage?: number, limit?: number, title?: string) {
         let queryParams = "";
@@ -100,6 +106,12 @@ export class FilmService
               return mostWatchedCategoriesData;
             })
           );
+
+        return response;
+    }
+
+    getFilmSummary(filmId: number) {
+        const response = this.httpService.GetMethod(this.endPointUrl + `/${filmId}/summary`) as Observable<FilmSummary>;
 
         return response;
     }

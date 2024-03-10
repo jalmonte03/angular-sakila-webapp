@@ -10,3 +10,12 @@ export type Customer = {
     country: string,
     zipcode?: string | null
 };
+
+export type CustomerSummary = {
+    id: number,
+    customerName: string,
+    moviesNotReturned: number,
+    moviesRentedTotal: number,
+    totalSpent: number,
+    mostViewedCategory: string
+};

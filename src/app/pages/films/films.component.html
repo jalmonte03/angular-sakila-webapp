@@ -1,6 +1,6 @@
 <app-sidebar-content>
     <!-- Filter Bar -->
-    <app-filters-bar
+    <app-search-filters-bar
         [(searchFilter)]="searchString"
         inputLabel="Search Films"
         inputPlaceholder="Eg: Divine Resurrection"
@@ -12,7 +12,7 @@
         />
     <!-- Films List -->
     <div class="films-list-ctr" *ngIf="!loading">
-        <app-film *ngFor="let film of films" [film]="film" />   
+        <app-film *ngFor="let film of films" [film]="film" (click)="onFilmClickedHandler(film.id)" />   
     </div>
 
     <!-- Loading Spinner -->

@@ -29,7 +29,7 @@ export class CustomersComponent implements OnInit {
   
   ngOnInit(): void {
     // Show modal on init (temporary)
-    const customerViewRef = this.customerViewModal.open(CustomerViewModalComponent);
+    // const customerViewRef = this.customerViewModal.open(CustomerViewModalComponent);
 
     // Fetch all customers
     this.customerService.getCustomers()
@@ -68,5 +68,13 @@ export class CustomersComponent implements OnInit {
           this.total = response.total;
         }
       })
+  }
+
+  onCustomerClickedHandler(customerId: number) {
+    const customerViewRef = this.customerViewModal.open(CustomerViewModalComponent, {
+      data: {
+        customerId
+      }
+    });
   }
 }

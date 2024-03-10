@@ -1,4 +1,7 @@
 <app-sidebar-content title="Rentals">
+    <!-- Filter Bar -->
+    <app-search-filters-bar multiple [filters]="filters" />
+    
     <!-- Rentals List -->
     <div class="films-list-ctr" *ngIf="!loading">
         <app-rental *ngFor="let rental of rentals" [rental]="rental" />   

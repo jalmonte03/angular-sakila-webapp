@@ -1,30 +1,40 @@
 <h2 mat-dialog-title class="title">Customer Viewer</h2>
 <mat-dialog-content>
-    <h4>Customer Info</h4>
-    <div class="customer-info-data">
-        <app-readonly-input label="Customer Id" value="1" />
-        <app-readonly-input label="Full Name" value="John Doe" />
-        <app-readonly-input label="Email" value="john.doe@email.com" />
-        <app-readonly-input label="Address" value="123 Main Street" />
-        <app-readonly-input label="Address 2" value="Apt #412" />
-        <app-readonly-input label="State | District" value="Florida" />
-        <app-readonly-input label="City" value="Orlando" />
-        <app-readonly-input label="Postal Code" value="32792" />
-        <app-readonly-input label="Customer Since" value="May 2024" />
-        <app-readonly-checkbox label="Is active?" [checked]="true" />
-    </div>
-    <hr />
-    <h4>Customer Summary</h4>
-    <div class="customer-summary-data">
-        <app-readonly-input label="Movies Rented" value="14" />
-        <app-readonly-input label="Movies not returned" value="1" />
-        <app-readonly-input label="Amount Spent" value="$45.00" />
-    </div>
+    @if(!loading)
+    {
+        @if(customer !== undefined && customerSummary !== undefined)
+        {
+            <h4>Customer Info</h4>
+            <div class="customer-info-data">
+                <app-readonly-input label="Customer Id" [value]="customer.id.toString()" />
+                <app-readonly-input label="Full Name" value="{{ customer.first_Name | titlecase }} {{ customer.last_Name | titlecase }}" />
+                <app-readonly-input label="Email" [value]="customer.email.toLowerCase()" />
+                <app-readonly-input label="Customer Since" value="May 2024" />
+                <app-readonly-input label="Address" [value]="customer.streetAddress" />
+                <app-readonly-input label="Address 2" [value]="customer.streetAddress2 || 'N/A'" />
+                <app-readonly-input label="State | District" [value]="customer.city" />
+                <app-readonly-input label="City" [value]="customer.city" />
+                <app-readonly-input label="Postal Code" [value]="customer.zipcode || 'N/A'" />
+                <app-readonly-input label="Country" [value]="customer.country" />
+                <app-readonly-checkbox label="Is active?" [checked]="!!(+customer.active)" />
+            </div>
+            <hr />
+            <h4>Customer Summary</h4>
+            <div class="customer-summary-data">
+                <app-readonly-input label="Movies Rented" [value]="customerSummary.moviesRentedTotal.toString()" />
+                <app-readonly-input label="Movies not returned" [value]="customerSummary.moviesNotReturned.toString()" />
+                <app-readonly-input label="Most View Category" [value]="customerSummary.mostViewedCategory" />
+                <app-readonly-input label="Amount Spent" [value]="customerSummary.totalSpent.toString()" />
+            </div>
+        }
+    } @else {
+        <app-spinner />
+    }
 </mat-dialog-content>
 <mat-dialog-actions>
     <div class="dialog-actions-ctr">
         <div>
-            <button mat-button mat-raised-button>View Rentals</button>
+            <button mat-button mat-raised-button [disabled]="this.loading">View Rentals</button>
         </div>
         <div>
             <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>

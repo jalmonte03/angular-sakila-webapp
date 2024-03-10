@@ -2,17 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterOutlet, provideRouter } from '@angular/router';
-import { routes } from './app.routes';
-
-//Material Components
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatSidenavModule } from '@angular/material/sidenav';
-// import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-// import { MatCardModule } from '@angular/material/card';
-// import { MatPaginatorModule } from '@angular/material/paginator';
-// import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterOutlet } from '@angular/router';
 
 // Components
 import { AppComponent } from './app.component';
@@ -30,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FilmComponent } from './components/film/film.component';
 import { RentalComponent } from './components/rental/rental.component';
-import { FiltersBarComponent } from './components/filters-bar/filters-bar.component';
+import { FiltersBarComponent } from './components/search-filters-bar/search-filters-bar.component';
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { HorizontalBargraphComponent } from './components/horizontal-bargraph/horizontal-bargraph.component';
@@ -40,6 +30,7 @@ import { LinechartComponent } from './components/linechart/linechart.component';
 import { CustomerViewModalComponent } from './pages/customers/customer-view-modal/customer-view-modal.component';
 import { ReadonlyInputComponent } from './components/readonly-input/readonly-input.component';
 import { ReadonlyCheckboxComponent } from './components/readonly-checkbox/readonly-checkbox.component';
+import { FilmViewModalComponent } from './pages/films/film-view-modal/film-view-modal.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +55,8 @@ import { ReadonlyCheckboxComponent } from './components/readonly-checkbox/readon
     LinechartComponent,
     CustomerViewModalComponent,
     ReadonlyInputComponent,
-    ReadonlyCheckboxComponent
+    ReadonlyCheckboxComponent,
+    FilmViewModalComponent
   ],
   imports: [
     BrowserModule,

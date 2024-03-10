@@ -5,11 +5,11 @@ h2.title {
     margin-bottom: 1rem;
 }
 
-.customer-info-data,
-.customer-summary-data {
+.film-info-data,
+.film-summary-data {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
 }
 

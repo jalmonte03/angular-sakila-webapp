@@ -1,0 +1,38 @@
+<mat-card class="search-filters-bar-component">
+    <div>
+        <!-- Single Search Filter -->
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" *ngIf="!multiple">
+            <mat-label>{{ inputLabel }}</mat-label>
+            <input 
+                matInput 
+                [placeholder]="inputPlaceholder" 
+                name="search" 
+                [(ngModel)]="searchFilter" 
+                (ngModelChange)="searchFilterChange.emit(searchFilter)"
+                (keyup)="onEnterKeyPressed($event)" />
+            <button matSuffix mat-icon-button (click)="onSearchEvent.emit()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+        <!-- Multiple Search Filters -->
+        <div class="search-filters-bar-component__multiple" *ngIf="multiple">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" *ngFor="let filter of filters">
+                <mat-label>{{ filter.label || filter.name }}</mat-label>
+                <input 
+                    matInput 
+                    [placeholder]="filter.placeholder" 
+                    [name]="filter.name" 
+                    (keyup)="onEnterKeyPressed($event)" />
+            </mat-form-field>
+            <button mat-raised-button color="primary"><mat-icon>search</mat-icon> Search</button>
+        </div>
+    </div>
+    <div>
+        <mat-paginator 
+            [length]="totalItems" 
+            [pageSize]="limit"
+            [pageIndex]="currentPage - 1" 
+            [pageSizeOptions]="[10,25,50]"
+            (page)="onPageChangeEvent.emit($event)" />
+    </div>
+</mat-card>

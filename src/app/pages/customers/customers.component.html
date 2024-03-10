@@ -1,6 +1,6 @@
 <app-sidebar-content>
     <!-- Filters Bar -->
-    <app-filters-bar
+    <app-search-filters-bar
         inputLabel="Search Customer"
         inputPlaceholder="Eg: John Doe"
         [(searchFilter)]="searchString"
@@ -11,7 +11,7 @@
         (onSearchEvent)="onSearchFilterClickedHandler()" />
     <!-- Customer List -->
     <div class="customers-list-ctr" *ngIf="!loading && customers.length > 0">
-        <app-customer *ngFor="let customer of customers;index as i" [customer]="customer" />
+        <app-customer *ngFor="let customer of customers;index as i" [customer]="customer" (click)="onCustomerClickedHandler(customer.id)" />
     </div>
     <!-- No Customer -->
     <div class="no-customers-msg" *ngIf="!loading && customers.length == 0">
