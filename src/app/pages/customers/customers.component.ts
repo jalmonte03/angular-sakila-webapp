@@ -4,6 +4,7 @@ import { Customer } from '../../types/models/customer';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerViewModalComponent } from './customer-view-modal/customer-view-modal.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -24,12 +25,25 @@ export class CustomersComponent implements OnInit {
 
   constructor(
     public customerViewModal: MatDialog,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private route: ActivatedRoute
   ) {}
   
   ngOnInit(): void {
-    // Show modal on init (temporary)
-    // const customerViewRef = this.customerViewModal.open(CustomerViewModalComponent);
+    // Load customer when there is a valid id on the query
+    this.route.queryParams.subscribe({
+      next: (params) => {
+        if(params["id"] && Number.isInteger(+params["id"])) {
+          const customerId = +params["id"];
+
+          this.customerViewModal.open(CustomerViewModalComponent, {
+            data: {
+              customerId
+            }
+          });
+        }
+      }
+    });
 
     // Fetch all customers
     this.customerService.getCustomers()

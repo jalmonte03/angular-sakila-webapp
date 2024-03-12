@@ -2,9 +2,14 @@ import { Injectable, Query } from "@angular/core";
 import { HttpService } from "./http.service";
 import { RentalsResponse } from "../types/api/rentals";
 import { Observable, map } from "rxjs";
-import { RentalMonthRevenue, RentalMonthSummary } from "../types/models/rental";
+import { Rental, RentalMonthRevenue, RentalMonthSummary } from "../types/models/rental";
 import { GraphData } from "../types/shared/graph";
 import { getMonthAbv } from "../misc/date";
+
+type RentalFilters = {
+    customerId: string,
+    filmId: string
+};
 
 @Injectable({
     providedIn: 'root'
@@ -15,21 +20,40 @@ export class RentalService
 
     constructor(private httpService: HttpService) {}
 
-    getRentals(currentPage?: number, limit?: number) {
+    getRental(rentalId: number) {
+        const req= this.httpService.GetMethod(this.endPointUrl + `/${rentalId}`) as Observable<Rental>;
+
+        return req;
+    }
+
+    getRentals(currentPage?: number, limit?: number, filters?: RentalFilters) {
         let queryParams = "";
+        let searchParams = new URLSearchParams();
 
         if(typeof currentPage == "number") {
-            let searchParams = new URLSearchParams({
-                page: (currentPage + 1).toString(),
-                limit: limit?.toString() || "10"
-            });
-
-            queryParams = `?${searchParams.toString()}`;
+            searchParams.append("page", (currentPage + 1).toString());
+            searchParams.append("limit", limit?.toString() || "10");
         }
 
-        const response = this.httpService.GetMethod(this.endPointUrl + queryParams) as Observable<RentalsResponse>;
+        if (filters !== undefined) {
+            if (Number.isInteger(+filters.customerId)) {
+                searchParams.append("customerId", filters.customerId);
+            } else if(filters.customerId.trim().length !== 0) {
+                return null;
+            }
+            
+            if (Number.isInteger(+filters.filmId)) {
+                searchParams.append("filmId", filters.filmId);
+            } else if(filters.filmId.trim().length !== 0) {
+                return null;
+            }
+        }
         
-        return response;
+        queryParams = `?${searchParams.toString()}`;
+
+        const req= this.httpService.GetMethod(this.endPointUrl + queryParams) as Observable<RentalsResponse>;
+        
+        return req;
     }
 
     getMonthlySummary(from?: string, to?: string): Observable<GraphData> {
@@ -42,7 +66,7 @@ export class RentalService
 
         queryParams = `?${searchParams.toString()}`;
 
-        const response = this.httpService.GetMethod<RentalMonthSummary[]>(this.endPointUrl + "/rentals_monthly_summary" + queryParams)
+        const req= this.httpService.GetMethod<RentalMonthSummary[]>(this.endPointUrl + "/rentals_monthly_summary" + queryParams)
             .pipe(map(monthlyRentalsSummary => {
                 return monthlyRentalsSummary.reduce((prev, curr) => {
                     prev.labels.push(
@@ -53,7 +77,7 @@ export class RentalService
                 }, { data: [], labels: [] } as GraphData);
             }));
 
-        return response;
+        return req;
     }
 
     getMonthlyRevenue(from?: string, to?: string): Observable<GraphData> {
@@ -66,7 +90,7 @@ export class RentalService
 
         queryParams = `?${searchParams.toString()}`;
 
-        const response = this.httpService.GetMethod<RentalMonthRevenue[]>(this.endPointUrl + "/monthly_rental_revenue" + queryParams)
+        const req= this.httpService.GetMethod<RentalMonthRevenue[]>(this.endPointUrl + "/monthly_rental_revenue" + queryParams)
             .pipe(map(monthlyRevenueData => {
                 return monthlyRevenueData.reduce((prev, curr) => {
                     prev.labels.push(
@@ -76,6 +100,6 @@ export class RentalService
                 }, { data: [], labels: [] } as GraphData);
             }));
 
-        return response;
+        return req;
     }
 }

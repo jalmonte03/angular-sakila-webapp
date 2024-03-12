@@ -16,9 +16,9 @@ export class FilmService
     constructor(private httpService: HttpService) { }
 
     getSingleFilm(filmId: number) {
-        const response = this.httpService.GetMethod(this.endPointUrl + `/${filmId}`) as Observable<Film>;
+        const req = this.httpService.GetMethod(this.endPointUrl + `/${filmId}`) as Observable<Film>;
 
-        return response;
+        return req;
     }
 
     getFilms(currentPage?: number, limit?: number, title?: string) {
@@ -37,9 +37,9 @@ export class FilmService
             queryParams = `?${searchParams.toString()}`;
         }
 
-        const response = this.httpService.GetMethod(this.endPointUrl + queryParams) as Observable<FilmsResponse>;
+        const req = this.httpService.GetMethod(this.endPointUrl + queryParams) as Observable<FilmsResponse>;
         
-        return response;
+        return req;
     }
 
     getMostWatchedFilms(limit: number = 5, from?: string, to?: string): Observable<GraphData> {
@@ -58,7 +58,7 @@ export class FilmService
 
         queryParams = `?${searchParams.toString()}`;
 
-        const response = this.httpService.GetMethod<FilmWatched[]>(this.endPointUrl + "/most_rented_films" + queryParams)
+        const req = this.httpService.GetMethod<FilmWatched[]>(this.endPointUrl + "/most_rented_films" + queryParams)
         .pipe(
             map(val => {
     
@@ -73,7 +73,7 @@ export class FilmService
             })
           );
 
-        return response;
+        return req;
     }
     
     getMostWatchedCategories(limit: number = 5, from?: string, to?: string): Observable<GraphData> {
@@ -92,7 +92,7 @@ export class FilmService
 
         queryParams = `?${searchParams.toString()}`;
 
-        const response = this.httpService.GetMethod<CategoryWatched[]>(this.endPointUrl + "/most_watched_categories" + queryParams)
+        const req = this.httpService.GetMethod<CategoryWatched[]>(this.endPointUrl + "/most_watched_categories" + queryParams)
         .pipe(
             map(val => {
     
@@ -107,12 +107,12 @@ export class FilmService
             })
           );
 
-        return response;
+        return req;
     }
 
     getFilmSummary(filmId: number) {
-        const response = this.httpService.GetMethod(this.endPointUrl + `/${filmId}/summary`) as Observable<FilmSummary>;
+        const req = this.httpService.GetMethod(this.endPointUrl + `/${filmId}/summary`) as Observable<FilmSummary>;
 
-        return response;
+        return req;
     }
 }

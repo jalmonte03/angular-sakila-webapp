@@ -12,6 +12,7 @@
                 <app-readonly-input label="Release Year" [value]="film.releaseYear" />
                 <app-readonly-input label="Rental Duration" value="{{film.rentalDuration}} days" />
                 <app-readonly-input label="Rental Rate" value="{{film.rentalRate | currency }}" />
+                <app-readonly-input label="Replacement Cost" value="{{film.replacementCost | currency }}" />
                 <app-readonly-input label="Film Length" value="{{film.length }} minutes" />
                 <app-readonly-input label="Rating" [value]="film.rating" />
                 <app-readonly-input label="Categories" [value]="filmCategories ?? 'N/A'" />
@@ -24,6 +25,8 @@
                 <app-readonly-input label="In Stock" [value]="filmSummary.inStock.toString()" />
                 <app-readonly-input label="Not Returned | Lost" [value]="filmSummary.notReturned.toString()" />
             </div>
+        } @else if (notFound) {
+            <div class="error-message">Film with id "{{ data.filmId }}" not found.</div>
         }
     } @else {
         <app-spinner />
@@ -32,7 +35,7 @@
 <mat-dialog-actions>
     <div class="dialog-actions-ctr">
         <div>
-            <button mat-button mat-raised-button [disabled]="this.loading">View Rentals</button>
+            <button *ngIf="film" mat-button mat-raised-button (click)="goToRentals()" mat-dialog-close>View Rentals</button>
         </div>
         <div>
             <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>

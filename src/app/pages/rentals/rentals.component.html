@@ -1,10 +1,17 @@
 <app-sidebar-content title="Rentals">
     <!-- Filter Bar -->
-    <app-search-filters-bar multiple [filters]="filters" />
+    <app-search-filters-bar 
+        multiple 
+        [filters]="filters" 
+        (onSearchEvent)="onSearchButtonClickedHandler()" 
+        [currentPage]="currentPage"
+        [limit]="limit"
+        [totalItems]="total"
+        (onPageChangeEvent)="onPaginatorChangedHandler($event)" />
     
     <!-- Rentals List -->
     <div class="films-list-ctr" *ngIf="!loading">
-        <app-rental *ngFor="let rental of rentals" [rental]="rental" />   
+        <app-rental *ngFor="let rental of rentals" [rental]="rental" (click)="onRentalClickedHandler(rental.id)" />   
     </div>
 
     <!-- Loading Spinner -->

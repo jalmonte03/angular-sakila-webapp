@@ -31,6 +31,8 @@ import { CustomerViewModalComponent } from './pages/customers/customer-view-moda
 import { ReadonlyInputComponent } from './components/readonly-input/readonly-input.component';
 import { ReadonlyCheckboxComponent } from './components/readonly-checkbox/readonly-checkbox.component';
 import { FilmViewModalComponent } from './pages/films/film-view-modal/film-view-modal.component';
+import { SnackbarAlertComponent } from './components/snackbar-alert/snackbar-alert.component';
+import { RentalViewModalComponent } from './pages/rentals/rental-view-modal/rental-view-modal.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { FilmViewModalComponent } from './pages/films/film-view-modal/film-view-
     CustomerViewModalComponent,
     ReadonlyInputComponent,
     ReadonlyCheckboxComponent,
-    FilmViewModalComponent
+    FilmViewModalComponent,
+    SnackbarAlertComponent,
+    RentalViewModalComponent
   ],
   imports: [
     BrowserModule,

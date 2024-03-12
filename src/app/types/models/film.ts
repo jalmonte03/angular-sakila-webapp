@@ -5,6 +5,7 @@ export type Film = {
     releaseYear: string,
     rentalDuration: number,
     rentalRate: number,
+    replacementCost: number,
     length: number,
     rating: string,
     lastUpdate: Date,

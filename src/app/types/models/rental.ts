@@ -8,6 +8,7 @@ export type Rental = {
     filmReleaseYear: string,
     filmRentalDuration: number,
     filmRentalRate: number,
+    paymentAmount: number,
     rentalDate: string,
     returnDate: string
 };

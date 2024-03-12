@@ -9,7 +9,7 @@
                 <app-readonly-input label="Customer Id" [value]="customer.id.toString()" />
                 <app-readonly-input label="Full Name" value="{{ customer.first_Name | titlecase }} {{ customer.last_Name | titlecase }}" />
                 <app-readonly-input label="Email" [value]="customer.email.toLowerCase()" />
-                <app-readonly-input label="Customer Since" value="May 2024" />
+                <app-readonly-input label="Customer Since" value="{{ customer.created | date:'longDate' }}" />
                 <app-readonly-input label="Address" [value]="customer.streetAddress" />
                 <app-readonly-input label="Address 2" [value]="customer.streetAddress2 || 'N/A'" />
                 <app-readonly-input label="State | District" [value]="customer.city" />
@@ -26,6 +26,9 @@
                 <app-readonly-input label="Most View Category" [value]="customerSummary.mostViewedCategory" />
                 <app-readonly-input label="Amount Spent" [value]="customerSummary.totalSpent.toString()" />
             </div>
+        } @else if (notFound) 
+        {
+            <div class="error-message">User with id "{{ data.customerId }}" not found.</div>
         }
     } @else {
         <app-spinner />
@@ -34,7 +37,7 @@
 <mat-dialog-actions>
     <div class="dialog-actions-ctr">
         <div>
-            <button mat-button mat-raised-button [disabled]="this.loading">View Rentals</button>
+            <button *ngIf="customer" mat-raised-button (click)="goToRentals()" mat-dialog-close>View Rentals</button>
         </div>
         <div>
             <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>

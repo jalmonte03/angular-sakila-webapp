@@ -4,6 +4,7 @@ import { FilmService } from '../../services/film.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { FilmViewModalComponent } from './film-view-modal/film-view-modal.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-films',
@@ -21,9 +22,26 @@ export class FilmsComponent implements OnInit {
   
   constructor(
     public filmViewModal: MatDialog,
-    private filmService: FilmService) { }
+    private filmService: FilmService,
+    private route: ActivatedRoute) { }
   
   ngOnInit(): void {
+    // Load film when there is a valid id on the query
+    this.route.queryParams.subscribe({
+      next: (params) => {
+        if(params["id"] && Number.isInteger(+params["id"])) {
+          const filmId = +params["id"];
+
+          this.filmViewModal.open(FilmViewModalComponent, {
+            data: {
+              filmId
+            }
+          });
+        }
+      }
+    });
+
+
     this.filmService.getFilms()
       .subscribe(response => {
         this.films = response.films;

@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="title">Rental Viewer</h2>
+<mat-dialog-content>
+    @if(!loading)
+    {
+        @if(rental !== undefined)
+        {
+            <h4>Rental Info</h4>
+            <div class="rental-info-data">
+                <app-readonly-input label="Rental Id" [value]="rental.id.toString()" />
+                <app-readonly-input label="Customer Name" value="{{ rental.customerName | titlecase }}" />
+                <app-readonly-input label="Film Title" value="{{ rental.filmTitle | titlecase }}" />
+                <app-readonly-input label="Rental Date" value="{{ rental.rentalDate | date:'short' }}" />
+                <app-readonly-input label="Return Date" value="{{ (rental.returnDate !== null) ? (rental.returnDate | date:'short') : 'N/A' }}" />
+                <app-readonly-input label="Rental Payment" value="{{ rental.paymentAmount | currency }}" />
+            </div>
+        }
+    } @else {
+        <app-spinner />
+    }
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="dialog-actions-ctr">
+        <div>
+            <button mat-button mat-raised-button [disabled]="this.loading" (click)="goToCustomer()" mat-dialog-close>View Customer</button>
+            <button mat-button mat-raised-button [disabled]="this.loading" (click)="goToFilm()" mat-dialog-close>View Film</button>
+        </div>
+        <div>
+            <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>
+        </div>
+    </div>
+</mat-dialog-actions>

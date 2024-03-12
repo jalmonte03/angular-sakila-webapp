@@ -3,6 +3,10 @@ import { Rental } from '../../types/models/rental';
 import { RentalService } from '../../services/rental.service';
 import { PageEvent } from '@angular/material/paginator';
 import { SearchFilter } from '../../components/search-filters-bar/search-filters-bar.component';
+import { MatDialog } from '@angular/material/dialog';
+import { RentalViewModalComponent } from './rental-view-modal/rental-view-modal.component';
+import { ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-rentals',
@@ -10,9 +14,11 @@ import { SearchFilter } from '../../components/search-filters-bar/search-filters
   styleUrl: './rentals.component.scss'
 })
 export class RentalsComponent implements OnInit {
+  errorMessage = `Either "Customer Id" or "Film Id" have an invalid id`;
   loading: boolean = true;
   rentals: Rental[] = [];
   
+
   // Filters Property
   filters: SearchFilter[] = [
     {
@@ -33,27 +39,93 @@ export class RentalsComponent implements OnInit {
   total: number = 0;
   limit: number = 10;
   
-  constructor(private rentalService: RentalService) { }
+  constructor(
+    private rentalModal: MatDialog,
+    private rentalService: RentalService,
+    private alertService: AlertService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.rentalService.getRentals(this.currentPage, this.limit)
-      .subscribe(response => {
-        this.rentals = response.rentals;
-        this.currentPage = response.currentPage;
-        this.total = response.total;
+    // Get Query Params
+    this.route.queryParams.subscribe({
+      next: (params) => {
+        const customerIdFilter = this.filters.find(f => f.name === "customer-id")!;
+        const filmIdFilter = this.filters.find(f => f.name === "film-id")!;
 
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      });
+        // Update filters if there is a query params in the route
+        customerIdFilter.value = params["customerId"] ?? "";
+        filmIdFilter.value = params["filmId"] ?? "";
+
+        const rentalsObs = this.rentalService.getRentals(this.currentPage, this.limit, {
+          customerId: customerIdFilter.value,
+          filmId: filmIdFilter.value
+        });
+
+        if(rentalsObs !== null)
+        {
+          rentalsObs.subscribe(response => {
+            this.rentals = response.rentals;
+            this.currentPage = response.currentPage;
+            this.total = response.total;
+
+            setTimeout(() => {
+              this.loading = false;
+            }, 500);
+          });
+        } else {
+          this.sendSnackbarErrorMessage();
+        }
+      }
+    });
+
+    
   }
 
   onPaginatorChangedHandler = (e: PageEvent) => {
-    this.rentalService.getRentals(e.pageIndex, e.pageSize)
-      .subscribe(response => {
+    const rentalObs = this.rentalService.getRentals(e.pageIndex, e.pageSize, {
+      customerId: this.filters.find(f => f.name === "customer-id")!.value,
+      filmId: this.filters.find(f => f.name === "film-id")!.value
+    });
+
+    if(rentalObs !== null) {
+      rentalObs.subscribe(response => {
         this.rentals = response.rentals;
         this.currentPage = response.currentPage;
         this.total = response.total;
       });
+    } else {
+      this.sendSnackbarErrorMessage();
+    }
+  }
+
+  onSearchButtonClickedHandler = () => {
+    const rentalObs = this.rentalService.getRentals(0, this.limit, {
+      customerId: this.filters.find(f => f.name === "customer-id")!.value,
+      filmId: this.filters.find(f => f.name === "film-id")!.value
+    });
+    
+    if (rentalObs !== null) {
+      rentalObs.subscribe({
+        next: (response) => {
+          this.rentals = response.rentals,
+          this.currentPage = response.currentPage,
+          this.total = response.total
+        }
+      });
+    } else {
+      this.sendSnackbarErrorMessage();
+    }
+  }
+
+  onRentalClickedHandler(rentalId: number) {
+    const rentalViewRef = this.rentalModal.open(RentalViewModalComponent, {
+      data: {
+        rentalId
+      }
+    });
+  }
+
+  sendSnackbarErrorMessage() {
+    this.alertService.sendWarning(this.errorMessage);
   }
 }

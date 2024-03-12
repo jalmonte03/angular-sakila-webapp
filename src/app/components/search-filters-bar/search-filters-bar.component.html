@@ -19,12 +19,13 @@
             <mat-form-field appearance="outline" subscriptSizing="dynamic" *ngFor="let filter of filters">
                 <mat-label>{{ filter.label || filter.name }}</mat-label>
                 <input 
-                    matInput 
+                    matInput
+                    [(ngModel)]="filter.value"
                     [placeholder]="filter.placeholder" 
                     [name]="filter.name" 
                     (keyup)="onEnterKeyPressed($event)" />
             </mat-form-field>
-            <button mat-raised-button color="primary"><mat-icon>search</mat-icon> Search</button>
+            <button mat-raised-button color="primary" (click)="onSearchEvent.emit()"><mat-icon>search</mat-icon> Search</button>
         </div>
     </div>
     <div>

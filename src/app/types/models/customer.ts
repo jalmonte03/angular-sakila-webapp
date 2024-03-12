@@ -8,7 +8,8 @@ export type Customer = {
     streetAddress2?: string | null,
     city: string,
     country: string,
-    zipcode?: string | null
+    zipcode?: string | null,
+    created: string
 };
 
 export type CustomerSummary = {

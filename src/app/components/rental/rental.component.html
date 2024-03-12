@@ -7,7 +7,7 @@
     <dl>
         <dt>Rented On</dt> 
         <dd>{{ rental?.rentalDate | date: 'medium' }}</dd>
-        <dt>Returned</dt> 
-        <dd>{{ rental?.returnDate | date: 'medium' }}</dd>
+        <dt *ngIf="rental?.returnDate !== null">Returned</dt> 
+        <dd *ngIf="rental?.returnDate !== null">{{ rental?.returnDate | date: 'medium' }}</dd>
     </dl>
 </mat-card>
