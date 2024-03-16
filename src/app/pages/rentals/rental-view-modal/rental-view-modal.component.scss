@@ -1,3 +1,5 @@
+@import "../../../../sass/mixin";
+
 hr { margin: 1.5rem 0; }
 
 h2.title {
@@ -10,16 +12,38 @@ h2.title {
     grid-template-columns: 1fr 1fr;
     align-items: flex-start;
     gap: 1rem;
+
+    @include mobile-breakpoint {
+        grid-template-columns: 1fr;
+    }
 }
 
 .dialog-actions-ctr {
     display: flex;
     width: 100%;
     padding: .5rem 1rem;
+    
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+
+    &__view-btns {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+
+        @include mobile-breakpoint {
+            flex-direction: column;
+    
+            div {
+                button {
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
 
 mat-dialog-content {
-    min-width: 800px;
+    overflow-x: hidden;
 }

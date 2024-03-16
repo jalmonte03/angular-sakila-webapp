@@ -1,7 +1,14 @@
+@import "../../../sass/mixin";
+
 .dashboard-container {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: minmax(0, 50vh) minmax(0, 50vh);
     gap: 2rem;
     flex: 1;
+
+    @include mobile-breakpoint() {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 1fr;
+    }
 }

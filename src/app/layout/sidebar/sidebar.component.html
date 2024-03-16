@@ -1,19 +1,19 @@
-<mat-sidenav-container hasBackdrop="false" [autosize]="true">
-    <mat-sidenav [(opened)]="openedSideBar" mode="side" [disableClose]="true">
+<mat-sidenav-container [hasBackdrop]="hasBackdrop" [autosize]="true" (backdropClick)="onClickedHideOnMobileHandler()">
+    <mat-sidenav #sidenav [(opened)]="openedSideBar" [mode]="mode" [disableClose]="false" [ngClass]="{ hide: this.hideOnMobileBreakpoint }">
         <div class="sidenav-menu">
-            <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="onClickedHideOnMobileHandler()">
                 <mat-icon fontIcon="dashboard"></mat-icon>
                 <span>Dashboard</span>
             </a>
-            <a [routerLink]="['/customers']" routerLinkActive="active">
+            <a [routerLink]="['/customers']" routerLinkActive="active" (click)="onClickedHideOnMobileHandler()">
                 <mat-icon fontIcon="person"></mat-icon>
                 <span>Customers</span>
             </a>
-            <a [routerLink]="['/films']" routerLinkActive="active">
+            <a [routerLink]="['/films']" routerLinkActive="active" (click)="onClickedHideOnMobileHandler()">
                 <mat-icon fontIcon="movie"></mat-icon>
                 <span>Films</span>
             </a>
-            <a [routerLink]="['/rentals']" routerLinkActive="active">
+            <a [routerLink]="['/rentals']" routerLinkActive="active" (click)="onClickedHideOnMobileHandler()">
                 <mat-icon fontIcon="shoppingmode"></mat-icon>
                 <span>Rentals</span>
             </a>

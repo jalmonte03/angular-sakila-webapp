@@ -1,5 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Sakila.App.Client';
   openedSideBar: BooleanInput = true;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
 
   onToggleSideBar () {
     this.openedSideBar = !this.openedSideBar;

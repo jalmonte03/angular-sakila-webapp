@@ -16,15 +16,17 @@
         </mat-form-field>
         <!-- Multiple Search Filters -->
         <div class="search-filters-bar-component__multiple" *ngIf="multiple">
-            <mat-form-field appearance="outline" subscriptSizing="dynamic" *ngFor="let filter of filters">
-                <mat-label>{{ filter.label || filter.name }}</mat-label>
-                <input 
-                    matInput
-                    [(ngModel)]="filter.value"
-                    [placeholder]="filter.placeholder" 
-                    [name]="filter.name" 
-                    (keyup)="onEnterKeyPressed($event)" />
-            </mat-form-field>
+            <div class="search-filters-bar-component__multiple__input-ctr">
+                <mat-form-field appearance="outline" subscriptSizing="dynamic" *ngFor="let filter of filters">
+                    <mat-label>{{ filter.label || filter.name }}</mat-label>
+                    <input 
+                        matInput
+                        [(ngModel)]="filter.value"
+                        [placeholder]="filter.placeholder" 
+                        [name]="filter.name" 
+                        (keyup)="onEnterKeyPressed($event)" />
+                </mat-form-field>
+            </div>
             <button mat-raised-button color="primary" (click)="onSearchEvent.emit()"><mat-icon>search</mat-icon> Search</button>
         </div>
     </div>

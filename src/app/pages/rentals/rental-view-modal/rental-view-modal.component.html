@@ -20,9 +20,13 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <div class="dialog-actions-ctr">
-        <div>
-            <button mat-button mat-raised-button [disabled]="this.loading" (click)="goToCustomer()" mat-dialog-close>View Customer</button>
-            <button mat-button mat-raised-button [disabled]="this.loading" (click)="goToFilm()" mat-dialog-close>View Film</button>
+        <div class="dialog-actions-ctr__view-btns">
+            <div>
+                <button mat-button mat-raised-button [disabled]="this.loading" (click)="goToCustomer()" mat-dialog-close><span class="hide-xs">View</span> Customer</button>
+            </div>
+            <div>
+                <button mat-button mat-raised-button [disabled]="this.loading" (click)="goToFilm()" mat-dialog-close><span class="hide-xs">View</span> Film</button>
+            </div>
         </div>
         <div>
             <button mat-button mat-dialog-close mat-raised-button color="warn">Close</button>
