@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import Chart, { ChartItem } from 'chart.js/auto';
 import { Observable } from 'rxjs';
 import { GraphData } from '../../types/shared/graph';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-linechart',
@@ -9,6 +10,7 @@ import { GraphData } from '../../types/shared/graph';
   styleUrl: './linechart.component.scss'
 })
 export class LinechartComponent {
+  error: boolean = false;
   loading: boolean = true;
   chart!: Chart;
 
@@ -16,6 +18,8 @@ export class LinechartComponent {
   @Input() labelText: string = "Line Graph";
 
   @ViewChild('lineGraph', { static: true }) barGraph!: ElementRef;
+
+  constructor(private alertService: AlertService) {}
 
   ngOnInit(): void {
     if (this.graphDataObs) {
@@ -79,6 +83,11 @@ export class LinechartComponent {
           });
         
           this.loading = false;
+        },
+        error: (err) => {
+          this.error = true;
+          this.loading = false;
+          this.alertService.sendHttpError(err);
         }
       });
     }

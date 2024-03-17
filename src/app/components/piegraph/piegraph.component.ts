@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { Observable } from 'rxjs';
 import { GraphData } from '../../types/shared/graph';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-piegraph',
@@ -9,6 +11,7 @@ import { GraphData } from '../../types/shared/graph';
   styleUrl: './piegraph.component.scss'
 })
 export class PiegraphComponent implements OnInit {
+  error: boolean = false;
   loading: boolean = true;
   chart: any;
 
@@ -16,6 +19,8 @@ export class PiegraphComponent implements OnInit {
   @Input() labelText: string = "Bar Graph";
 
   @ViewChild('pieGraph', { static: true }) canvasRef!: ElementRef;
+
+  constructor(private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.graphDataObs.subscribe({
@@ -46,8 +51,13 @@ export class PiegraphComponent implements OnInit {
         });
 
         this.loading = false;
+      },
+      error: (err) => {
+        this.error = true;
+        this.loading = false;
+        this.alertService.sendHttpError(err);
       }
-    })
+    });
     
   }
 }

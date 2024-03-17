@@ -1,6 +1,7 @@
-<div class="vertical-bargraph-component" [ngClass]="{hidden: loading}">
+<div class="vertical-bargraph-component" [ngClass]="{ hidden: loading || error }">
     <canvas #barGraph>{{ chart }}</canvas>
 </div>
+<div class="error-message" *ngIf="error">Chart failed to load</div>
 <div class="loading-spinner-container" *ngIf="loading">
     <app-spinner />
 </div>

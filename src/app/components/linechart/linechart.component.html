@@ -1,6 +1,7 @@
-<div class="linegraph-component" [ngClass]="{hidden: loading}">
+<div class="linegraph-component" [ngClass]="{ hidden: loading || error }">
     <canvas #lineGraph>{{ chart }}</canvas>
 </div>
+<div class="error-message" *ngIf="error">Chart failed to load</div>
 <div class="loading-spinner-container" *ngIf="loading">
     <app-spinner />
 </div>

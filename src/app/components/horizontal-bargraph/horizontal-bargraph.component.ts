@@ -3,6 +3,7 @@ import Chart, { ChartItem } from 'chart.js/auto';
 import { getGraphColors } from '../../misc/graph-colors';
 import { GraphData } from '../../types/shared/graph';
 import { Observable } from 'rxjs';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-horizontal-bargraph',
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
   styleUrl: './horizontal-bargraph.component.scss'
 })
 export class HorizontalBargraphComponent {
+  error: boolean = false;
   loading: boolean = true;
   chart!: Chart;
 
@@ -17,6 +19,8 @@ export class HorizontalBargraphComponent {
   @Input() labelText: string = "Bar Graph";
 
   @ViewChild('barGraph', { static: true }) barGraph!: ElementRef;
+
+  constructor(private alertService: AlertService) {}
 
   ngOnInit(): void {
     if (this.graphDataObs) {
@@ -47,6 +51,11 @@ export class HorizontalBargraphComponent {
           });
         
           this.loading = false;
+        },
+        error: (err) => {
+          this.error = true;
+          this.loading = false;
+          this.alertService.sendHttpError(err);
         }
       });
     }

@@ -5,6 +5,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerViewModalComponent } from './customer-view-modal/customer-view-modal.component';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../services/alert.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
@@ -26,7 +28,8 @@ export class CustomersComponent implements OnInit {
   constructor(
     public customerViewModal: MatDialog,
     private customerService: CustomerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertService: AlertService
   ) {}
   
   ngOnInit(): void {
@@ -47,6 +50,11 @@ export class CustomersComponent implements OnInit {
 
     // Fetch all customers
     this.customerService.getCustomers()
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
       .subscribe({
         next: (response) => {
           this.customers = response.customers;
@@ -56,12 +64,21 @@ export class CustomersComponent implements OnInit {
             this.loading = false;
           }, 500);
         },
-        error: (error) => console.error(error)
+        error: (err) => {
+          this.alertService.sendHttpError(err);
+        }
       });
   }
 
   onPaginatorChangedHandler(e: PageEvent) {
+    this.loading = true;
+
     this.customerService.getCustomers(e.pageIndex, e.pageSize, this.searchString)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
       .subscribe({
         next: (response) => {
           this.customers = response.customers;
@@ -69,17 +86,31 @@ export class CustomersComponent implements OnInit {
           this.total = response.total;
           this.limit = e.pageSize;
         },
-        error: (error) => console.error(error)
+        error: (err) => {
+          this.alertService.sendHttpError(err);
+          this.resetState();
+        },
       })
   }
 
   onSearchFilterClickedHandler() {
+    this.loading = true;
+
     this.customerService.getCustomers(0, this.limit, this.searchString)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
       .subscribe({
         next: (response) => {
           this.customers = response.customers;
           this.currentPage = response.currentPage;
           this.total = response.total;
+        },
+        error: (err) => {
+          this.alertService.sendHttpError(err);
+          this.resetState();
         }
       })
   }
@@ -90,5 +121,11 @@ export class CustomersComponent implements OnInit {
         customerId
       }
     });
+  }
+
+  resetState() {
+    this.customers = [];
+    this.currentPage = 1;
+    this.total = 0;
   }
 }

@@ -2,12 +2,6 @@
 
 .films-ctr {
     flex: 1;
-
-    .no-film-message {
-        text-align: center;
-        margin-top: 10rem;
-        font-size: 1.25rem;
-    }
 }
 
 .loading-spinner-ctr {
@@ -16,4 +10,14 @@
 
 .films-list-ctr {
     @include list-container;
+}
+
+.no-film-message {
+    flex: 1;
+}
+
+.no-film-message {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 5rem;
 }

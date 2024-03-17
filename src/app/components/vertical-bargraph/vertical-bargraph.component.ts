@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { getGraphColors } from '../../misc/graph-colors';
 import { Observable } from 'rxjs';
 import { GraphData } from '../../types/shared/graph';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-vertical-bargraph',
@@ -10,6 +11,7 @@ import { GraphData } from '../../types/shared/graph';
   styleUrl: './vertical-bargraph.component.scss'
 })
 export class VerticalBargraphComponent {
+  error: boolean = false;
   loading: boolean = true;
   chart: any;
   
@@ -17,6 +19,8 @@ export class VerticalBargraphComponent {
   @Input() labelText: string = "Vertical Bar Graph";
 
   @ViewChild('barGraph', { static: true }) barGraph!: ElementRef;
+
+  constructor(private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.graphDataObs.subscribe({
@@ -46,6 +50,11 @@ export class VerticalBargraphComponent {
         });
 
         this.loading = false;
+      },
+      error: (err) => {
+        this.error = true;
+        this.loading = false;
+        this.alertService.sendHttpError(err);
       }
     });
     

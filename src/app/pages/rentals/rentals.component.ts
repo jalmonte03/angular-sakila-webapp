@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RentalViewModalComponent } from './rental-view-modal/rental-view-modal.component';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-rentals',
@@ -63,15 +64,22 @@ export class RentalsComponent implements OnInit {
 
         if(rentalsObs !== null)
         {
-          rentalsObs.subscribe(response => {
-            this.rentals = response.rentals;
-            this.currentPage = response.currentPage;
-            this.total = response.total;
-
-            setTimeout(() => {
-              this.loading = false;
-            }, 500);
-          });
+          rentalsObs
+            .pipe(
+              finalize(() => {
+                this.loading = false;
+              })
+            )
+            .subscribe({
+              next: response => {
+                this.rentals = response.rentals;
+                this.currentPage = response.currentPage;
+                this.total = response.total;
+              },
+              error: (err) => {
+                this.alertService.sendHttpError(err);
+              }
+            });
         } else {
           this.sendSnackbarErrorMessage();
         }
@@ -88,10 +96,24 @@ export class RentalsComponent implements OnInit {
     });
 
     if(rentalObs !== null) {
-      rentalObs.subscribe(response => {
-        this.rentals = response.rentals;
-        this.currentPage = response.currentPage;
-        this.total = response.total;
+      this.loading = true;
+
+      rentalObs
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe({ 
+        next: response => {
+          this.rentals = response.rentals;
+          this.currentPage = response.currentPage;
+          this.total = response.total;
+        },
+        error: (err) => {
+          this.alertService.sendHttpError(err);
+          this.resetState();
+        }
       });
     } else {
       this.sendSnackbarErrorMessage();
@@ -105,12 +127,24 @@ export class RentalsComponent implements OnInit {
     });
     
     if (rentalObs !== null) {
-      rentalObs.subscribe({
-        next: (response) => {
-          this.rentals = response.rentals,
-          this.currentPage = response.currentPage,
-          this.total = response.total
-        }
+      this.loading = true;
+
+      rentalObs
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            this.rentals = response.rentals,
+            this.currentPage = response.currentPage,
+            this.total = response.total
+          },
+          error: (err) => {
+            this.alertService.sendHttpError(err);
+            this.resetState();
+          }
       });
     } else {
       this.sendSnackbarErrorMessage();
@@ -127,5 +161,11 @@ export class RentalsComponent implements OnInit {
 
   sendSnackbarErrorMessage() {
     this.alertService.sendWarning(this.errorMessage);
+  }
+
+  resetState() {
+    this.rentals = [];
+    this.currentPage = 1;
+    this.total = 0;
   }
 }

@@ -33,6 +33,7 @@ import { ReadonlyCheckboxComponent } from './components/readonly-checkbox/readon
 import { FilmViewModalComponent } from './pages/films/film-view-modal/film-view-modal.component';
 import { SnackbarAlertComponent } from './components/snackbar-alert/snackbar-alert.component';
 import { RentalViewModalComponent } from './pages/rentals/rental-view-modal/rental-view-modal.component';
+import { ProjectDescriptionComponent } from './components/project-description/project-description.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { RentalViewModalComponent } from './pages/rentals/rental-view-modal/rent
     ReadonlyCheckboxComponent,
     FilmViewModalComponent,
     SnackbarAlertComponent,
-    RentalViewModalComponent
+    RentalViewModalComponent,
+    ProjectDescriptionComponent
   ],
   imports: [
     BrowserModule,
