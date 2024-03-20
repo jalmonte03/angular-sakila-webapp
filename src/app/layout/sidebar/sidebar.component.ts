@@ -18,7 +18,7 @@ export class SidebarComponent {
   @ViewChild("sidenav") sidenav!: MatSidenav;
 
   ngAfterViewInit() {
-    if (window.innerWidth <= 480)
+    if (window.innerWidth <= 640)
     {
       this.hideOnMobileBreakpoint = true;
       this.sidenav.close();
@@ -38,7 +38,7 @@ export class SidebarComponent {
 
   @HostListener("window:resize", ["$event"])
   onWindowResize() {
-    if (window.innerWidth <= 480){
+    if (window.innerWidth <= 640){
       this.sidenav.toggle(false);
       this.openedSideBarChange.emit(false);
       this.mode = "over";
@@ -50,7 +50,7 @@ export class SidebarComponent {
   }
 
   onClickedHideOnMobileHandler() {
-    if(window.innerWidth <= 480) {
+    if(window.innerWidth <= 640) {
       this.sidenav.close();
       this.openedSideBarChange.emit(false);
     }

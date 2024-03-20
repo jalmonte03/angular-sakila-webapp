@@ -35,6 +35,7 @@ export class LinechartComponent {
               }],
             },
             options: {
+              maintainAspectRatio: false,
               responsive: true,
               plugins: {
                 title: {

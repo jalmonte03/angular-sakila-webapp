@@ -26,6 +26,6 @@ export class DashboardComponent implements OnInit {
     this.mostWatchedFilmsObs = this.filmService.getMostWatchedFilms(limit);
     this.mostWatchedCategoriesObs = this.filmService.getMostWatchedCategories(limit);
     this.monthlyRentedSummaryObs = this.rentalService.getMonthlySummary();
-    this.monthlyRentalRevenueObs = this.rentalService.getMonthlyRevenue();
+    this.monthlyRentalRevenueObs = this.rentalService.getMonthlyRevenue("2005-05-24","2005-08-31");
   }
 }

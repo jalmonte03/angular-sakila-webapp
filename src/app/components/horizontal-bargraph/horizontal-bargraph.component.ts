@@ -36,6 +36,7 @@ export class HorizontalBargraphComponent {
               }],
             },
             options: {
+              maintainAspectRatio: false,
               responsive: true,
               indexAxis: 'y',
               plugins: {

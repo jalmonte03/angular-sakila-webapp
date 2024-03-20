@@ -1,3 +1,5 @@
+@import "../../../sass/mixin";
+
 .linegraph-component {
     position: relative;
     width: 100%;
@@ -5,7 +7,12 @@
     min-height: 0;
     min-width: 0;
 
+    @include mobile-breakpoint {
+        height: 40vh;
+    }
+
     &.hidden { display: none; }
+
 }
 
 .error-message {

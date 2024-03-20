@@ -3,14 +3,14 @@
         <app-horizontal-bargraph
             labelText="Top 5 Most Watched Movies"
             [graphDataObs]="mostWatchedFilmsObs" />
-            <app-piegraph 
-                labelText="Most Watched Categories"
-                [graphDataObs]="mostWatchedCategoriesObs" />
-            <app-vertical-bargraph
-            [graphDataObs]="monthlyRentedSummaryObs"
-            labelText="Rented by month (May 2005 - Feb 2006)" />
-            <app-linechart
-            labelText="Monthly Rental Revenue (May 2005 - Aug 2005)"
-            [graphDataObs]="monthlyRentalRevenueObs" />
+        <app-piegraph 
+            labelText="Most Watched Categories"
+            [graphDataObs]="mostWatchedCategoriesObs" />
+        <app-vertical-bargraph
+        [graphDataObs]="monthlyRentedSummaryObs"
+        labelText="Rented by month (May 2005 - Feb 2006)" />
+        <app-linechart
+        labelText="Monthly Rental Revenue (May 2005 - Aug 2005)"
+        [graphDataObs]="monthlyRentalRevenueObs" />
     </div>
 </app-sidebar-content>

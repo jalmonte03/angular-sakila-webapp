@@ -35,6 +35,7 @@ export class VerticalBargraphComponent {
             }],
           },
           options: {
+            maintainAspectRatio: false,
             responsive: true,
             indexAxis: 'x',
             plugins: {
